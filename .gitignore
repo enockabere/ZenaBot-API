@@ -1,0 +1,7 @@
+.env
+venv/
+notes.txt
+__pycache__/
+run.py
+test.html
+.vscode/
