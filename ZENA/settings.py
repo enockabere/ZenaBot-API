@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'authentication',
+    'human_resource',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +81,15 @@ SIMPLE_JWT = {
     'JWT_ALLOW_REFRESH': True,
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
 }
-
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    }
+}
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 

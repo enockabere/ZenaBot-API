@@ -4,7 +4,9 @@ from django.contrib.auth.models import (
 from rest_framework_simplejwt.tokens import RefreshToken
 
 
+
 # Create your models here.
+
 class UserManager(BaseUserManager):
     def create_user(self, username, email, password=None):
         if username is None:
@@ -15,6 +17,7 @@ class UserManager(BaseUserManager):
         user = self.model(username=username, email=self.normalize_email(email))
         user.set_password(password)
         user.save()
+        LeaveBalance.objects.create(user=user)
         return user
     def create_superuser(self, username, email, password=None):
         if password is None:
@@ -50,3 +53,10 @@ class User(AbstractBaseUser, PermissionsMixin):
             'refresh': str(refresh),
             'access': str(refresh.access_token)
         }
+        
+class LeaveBalance(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    balance = models.PositiveIntegerField(default=21)
+    
+    def __str__(self):
+        return f"{self.user.username}'s Leave Balance: {self.balance}"
