@@ -26,3 +26,6 @@ class LeaveApplication(models.Model):
         leave_balance.balance -= (self.end_date - self.start_date).days
         leave_balance.save()
         super().save(*args, **kwargs)
+        
+    class Meta:
+        ordering = ['-date_applied']

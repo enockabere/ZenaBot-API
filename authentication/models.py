@@ -57,6 +57,11 @@ class User(AbstractBaseUser, PermissionsMixin):
 class LeaveBalance(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     balance = models.PositiveIntegerField(default=21)
+    date_applied = models.DateField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['-date_applied']
     
     def __str__(self):
         return f"{self.user.username}'s Leave Balance: {self.balance}"
+    

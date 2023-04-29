@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import LeaveBalance,LeaveApplication
+from .models import LeaveApplication
+from authentication.models import LeaveBalance
 
 
 class LeaveBalanceSerializer(serializers.ModelSerializer):

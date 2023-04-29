@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics, status, views, permissions
 from .serializers import RegisterSerializer,LoginSerializer
 from rest_framework.response import Response
+from .renderers import UserRenderer
 
 
 
@@ -10,6 +11,8 @@ from rest_framework.response import Response
 class RegisterView(generics.GenericAPIView):
 
     serializer_class = RegisterSerializer
+    renderer_classes = (UserRenderer,)
+
 
     def post(self, request):
         user = request.data
@@ -21,6 +24,7 @@ class RegisterView(generics.GenericAPIView):
      
 class LoginAPIView(generics.GenericAPIView):
     serializer_class = LoginSerializer
+    renderer_classes = (UserRenderer,)
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
